@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesanan Berhasil - Del Cafe</title>
+    <title>Pesanan Berhasil - Cafe</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -94,7 +94,7 @@
         <div class="success-header" style="background: linear-gradient(135deg, #ffc107, #ff9800);"> 
             <i class="fas fa-hourglass-half fa-4x mb-3"></i>
             <h2 class="mb-2">Pesanan Sedang Diproses</h2>
-            <p class="mb-0">Pesanan Anda kini sedang disiapkan oleh Del Cafe</p>
+            <p class="mb-0">Pesanan Anda kini sedang disiapkan oleh Cafe</p>
         </div>
             
             <div class="success-body">

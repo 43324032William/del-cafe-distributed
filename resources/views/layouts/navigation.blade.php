@@ -2,7 +2,7 @@
     <div class="container">
         {{-- Logo/Home link --}}
         <a class="navbar-brand" href="{{ url('/') }}">
-            <i class="fas fa-coffee me-2"></i>Del Cafe
+            <i class="fas fa-coffee me-2"></i>Cafe
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

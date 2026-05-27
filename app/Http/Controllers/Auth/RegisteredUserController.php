@@ -57,6 +57,6 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(route('menu.public', absolute: false))
-            ->with('success', 'Registrasi berhasil! Selamat datang di Del Cafe.');
+            ->with('success', 'Registrasi berhasil! Selamat datang di CoCo.');
     }
 }

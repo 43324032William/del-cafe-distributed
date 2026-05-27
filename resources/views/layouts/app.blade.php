@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>Del Cafe - @yield('title', 'Dashboard')</title>
+    <title>Cafe - @yield('title', 'Dashboard')</title>
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -107,7 +107,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <i class="fas fa-coffee me-2"></i>Del Cafe
+                <i class="fas fa-coffee me-2"></i>Cafe
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -185,11 +185,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5><i class="fas fa-coffee me-2"></i>Del Cafe</h5>
+                    <h5><i class="fas fa-coffee me-2"></i>Cafe</h5>
                     <p>Menikmati setiap tegukan, merasakan setiap kenikmatan.</p>
                 </div>
                 <div class="col-md-6 text-end">
-                    <p>&copy; 2024 Del Cafe. All rights reserved.</p>
+                    <p>&copy; 2024 Cafe. All rights reserved.</p>
                     <div class="admin-access">
                         <small class="text-muted">
                             <a href="{{ route('admin.login') }}" class="text-white-50 text-decoration-none">

@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Menu Del Cafe')
+@section('title', 'Menu Cafe')
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-12 text-center mb-5">
-            <h1 class="display-4 text-primary">Menu Del Cafe</h1>
+            <h1 class="display-4 text-primary">Menu Cafe</h1>
             <p class="lead text-muted">Nikmati berbagai pilihan makanan dan minuman terbaik kami</p>
         </div>
     </div>

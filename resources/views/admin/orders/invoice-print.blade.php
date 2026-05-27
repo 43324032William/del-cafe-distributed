@@ -62,9 +62,9 @@
         
         <!-- Header Toko -->
         <div class="header">
-            <h1 class="text-lg font-extrabold text-gray-900">Del Cafe</h1>
+            <h1 class="text-lg font-extrabold text-gray-900">Cafe</h1>
             <p class="text-xs">Jl. Contoh Digital No. 99, Jakarta</p>
-            <p class="text-xs">Telp: 085128329385 | Email: DelCafe@gmail.com</p>
+            <p class="text-xs">Telp: 085128329385 | Email: Cafe@gmail.com</p>
             <hr class="my-3 border-t-2 border-dashed border-gray-600">
         </div>
 

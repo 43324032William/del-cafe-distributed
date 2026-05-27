@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu - Del Cafe</title>
+    <title>Menu - Cafe</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -184,7 +184,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ route('menu.public') }}">
-                <i class="fas fa-coffee me-2"></i>Del Cafe
+                <i class="fas fa-coffee me-2"></i>Nama Cafe
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -273,7 +273,7 @@
     <!-- Hero Section -->
     <div class="hero-section">
         <div class="container">
-            <h1 class="display-4 fw-bold mb-3">Selamat Datang di Del Cafe</h1>
+            <h1 class="display-4 fw-bold mb-3">Selamat Datang di Cafe</h1>
             <p class="lead mb-4">Nikmati berbagai menu makanan dan minuman terbaik dengan kualitas premium</p>
             <a href="#menu" class="btn btn-light btn-lg">Lihat Menu</a>
         </div>
@@ -549,7 +549,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5><i class="fas fa-coffee me-2"></i>Del Cafe</h5>
+                    <h5><i class="fas fa-coffee me-2"></i>Cafe</h5>
                     <p>Menghadirkan pengalaman kuliner terbaik dengan bahan-bahan berkualitas premium.</p>
                 </div>
                 <div class="col-md-3">
@@ -565,13 +565,13 @@
                     <ul class="list-unstyled">
                         <li><i class="fas fa-map-marker-alt me-2"></i> Jl. Contoh No. 123</li>
                         <li><i class="fas fa-phone me-2"></i> (021) 123-4567</li>
-                        <li><i class="fas fa-envelope me-2"></i> info@delcafe.com</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@cafe.com</li>
                     </ul>
                 </div>
             </div>
             <hr>
             <div class="text-center">
-                <p>&copy; 2024 Del Cafe. All rights reserved.</p>
+                <p>&copy; 2024 Cafe. All rights reserved.</p>
             </div>
         </div>
     </footer>

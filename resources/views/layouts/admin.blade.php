@@ -148,7 +148,7 @@
             <div class="sidebar" id="sidebar">
                 <div class="logo-brand">
                     <i class="fas fa-coffee"></i>
-                    <span>Del Cafe Admin</span>
+                    <span>Cafe Admin</span>
                 </div>
                 
                 <nav class="nav flex-column mt-4">

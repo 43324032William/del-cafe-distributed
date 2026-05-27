@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Admin Dashboard - Del Cafe')
+@section('title', 'Admin Dashboard - Cafe')
 
 @section('content')
 <div class="container-fluid">

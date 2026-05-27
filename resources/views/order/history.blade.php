@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hasil Pencarian Pesanan - Del Cafe</title>
+    <title>Hasil Pencarian Pesanan - Cafe</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -119,7 +119,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ route('menu.public') }}">
-            <i class="fas fa-coffee me-2"></i>Del Cafe
+            <i class="fas fa-coffee me-2"></i>Cafe
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -502,7 +502,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5><i class="fas fa-coffee me-2"></i>Del Cafe</h5>
+                    <h5><i class="fas fa-coffee me-2"></i>Cafe</h5>
                     <p class="mb-0">Menghadirkan pengalaman kuliner terbaik dengan bahan-bahan berkualitas premium.</p>
                 </div>
                 <div class="col-md-3">
@@ -518,13 +518,13 @@
                     <ul class="list-unstyled">
                         <li><i class="fas fa-map-marker-alt me-2"></i> Jl. Contoh No. 123</li>
                         <li><i class="fas fa-phone me-2"></i> (021) 123-4567</li>
-                        <li><i class="fas fa-envelope me-2"></i> info@delcafe.com</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@cafe.com</li>
                     </ul>
                 </div>
             </div>
             <hr class="my-4">
             <div class="text-center">
-                <p class="mb-0">&copy; 2024 Del Cafe. All rights reserved.</p>
+                <p class="mb-0">&copy; 2024 Cafe. All rights reserved.</p>
             </div>
         </div>
     </footer>
