@@ -24,11 +24,12 @@ return [
 
         'mysql_notif' => [
             'driver' => 'mysql',
-            'host' => env('DB_SECONDARY_HOST', '127.0.0.1'),
-            'port' => env('DB_SECONDARY_PORT', '3306'),
-            'database' => env('DB_SECONDARY_DATABASE', 'del_cafe_replica'),
-            'username' => env('DB_SECONDARY_USERNAME', 'root'),
-            'password' => env('DB_SECONDARY_PASSWORD', ''),
+            // Diubah ke DB_HOST agar otomatis menembak IP Laptop 1 kamu yang sama
+            'host' => env('DB_HOST', '127.0.0.1'), 
+            'port' => env('DB_PORT', '3306'),
+            'database' => 'del_cafe_replica', // Langsung dikunci ke nama database replikamu
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
