@@ -11,18 +11,25 @@ class Order extends Model
 
     protected $fillable = [
         'order_number',
-        'queue_number',
+        'user_id',
         'customer_name',
-        'customer_phone', 
-        'customer_email',
-        'notes',
-        'total_amount',
+        'customer_phone',
+        'customer_email', 
         'status',
-        'user_id'
+        'total_amount',
+        'queue_number',
+        'notes' // <--- GANTI INI WIL! Harus 'notes' sesuai nama kolom di phpMyAdmin lu
     ];
 
+    // Relasi ke Item Order (Sudah benar)
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    // Relasi ke User (Sudah benar)
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

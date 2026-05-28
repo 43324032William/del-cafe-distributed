@@ -109,34 +109,6 @@
         .menu-item {
             margin-bottom: 2rem;
         }
-        .cart-sidebar {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 400px;
-            height: 100vh;
-            background: white;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            transition: right 0.3s ease;
-            z-index: 1050;
-            overflow-y: auto;
-        }
-        .cart-sidebar.open {
-            right: 0;
-        }
-        .cart-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1040;
-            display: none;
-        }
-        .cart-overlay.show {
-            display: block;
-        }
         .form-check-input:checked {
             background-color: #28a745;
             border-color: #28a745;
@@ -165,10 +137,6 @@
             color: white;
         }
         @media (max-width: 768px) {
-            .cart-sidebar {
-                width: 100%;
-                right: -100%;
-            }
             .hero-section h1 {
                 font-size: 2rem;
             }
@@ -180,7 +148,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ route('menu.public') }}">
@@ -191,9 +158,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <!-- AUTH LINKS - FIXED VERSION -->
                     @auth
-                        <!-- Tampilkan role user -->
                         <li class="nav-item">
                             <span class="nav-link">
                                 <i class="fas fa-user me-1"></i>
@@ -206,7 +171,6 @@
                             </span>
                         </li>
                         
-                        <!-- Menu khusus admin -->
                         @if(Auth::user()->role === 'admin')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.dashboard') }}">
@@ -214,7 +178,6 @@
                                 </a>
                             </li>
                         @else
-                            <!-- Menu khusus customer -->
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('order.history.form') }}">
                                     <i class="fas fa-receipt me-1"></i>Riwayat Saya
@@ -222,7 +185,6 @@
                             </li>
                         @endif
 
-                        <!-- Logout -->
                         <li class="nav-item">
                             <form method="POST" action="{{ route('logout') }}" class="d-inline">
                                 @csrf
@@ -232,7 +194,6 @@
                             </form>
                         </li>
                     @else
-                        <!-- User belum login -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">
                                 <i class="fas fa-sign-in-alt me-1"></i>Login/Masuk
@@ -245,19 +206,17 @@
                         </li>
                     @endauth
                     
-                    <!-- Tombol Pesan - Tampil untuk semua -->
                     <li class="nav-item">
-                        <button class="btn btn-outline-primary ms-2" onclick="handleOrderButton()">
+                        <button class="btn btn-outline-primary ms-2" type="button" onclick="handleOrderButton()">
                             <i class="fas fa-shopping-cart me-1"></i>
                             Pesan (<span id="cartCount">0</span>)
                         </button>
-                    </li>
+                    </td>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Category Navigation -->
     <div class="category-nav">
         <div class="container">
             <div class="nav nav-pills justify-content-center" id="categoryTabs">
@@ -270,7 +229,6 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
     <div class="hero-section">
         <div class="container">
             <h1 class="display-4 fw-bold mb-3">Selamat Datang di Cafe</h1>
@@ -279,15 +237,11 @@
         </div>
     </div>
 
-    <!-- Menu Section -->
     <div class="container" id="menu">
-        <!-- FORM ACTION DIUBAH KE order.store -->
         <form id="orderForm" action="{{ route('order.store') }}" method="POST">
             @csrf
             <input type="hidden" name="items" id="orderItems">
-
-            <!-- All Menu -->
-            <div class="category-section" id="all">
+            <input type="hidden" name="notes" id="hiddenOrderNotes"> <div class="category-section" id="all">
                 <h2 class="category-title">
                     <i class="fas fa-utensils me-2"></i>Semua Menu
                 </h2>
@@ -296,7 +250,6 @@
                         @foreach($items as $menu)
                         <div class="col-lg-4 col-md-6 menu-item">
                             <div class="card menu-card" id="menu-card-{{ $menu->id }}">
-                                <!-- Menu Image -->
                                 @if($menu->image)
                                     <img src="{{ asset('storage/' . $menu->image) }}" alt="{{ $menu->name }}" class="menu-image">
                                 @else
@@ -305,13 +258,11 @@
                                     </div>
                                 @endif
                                 
-                                <!-- Category Badge -->
                                 <span class="menu-category-badge">
                                     {{ $categories[$menu->category] ?? ucfirst($menu->category) }}
                                 </span>
 
                                 <div class="card-body">
-                                    <!-- Checkbox -->
                                     <div class="form-check mb-3">
                                         <input class="form-check-input menu-checkbox" type="checkbox" 
                                                id="menu-{{ $menu->id }}" data-menu-id="{{ $menu->id }}"
@@ -329,7 +280,6 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="menu-price">Rp {{ number_format($menu->price, 0, ',', '.') }}</span>
                                         
-                                        <!-- Quantity Input (hidden by default) -->
                                         <div class="quantity-control" id="quantity-{{ $menu->id }}" style="display: none;">
                                             <div class="input-group input-group-sm">
                                                 <button type="button" class="btn btn-outline-secondary" onclick="decreaseQuantity({{ $menu->id }})">-</button>
@@ -347,7 +297,6 @@
                 </div>
             </div>
 
-            <!-- Individual Categories -->
             @foreach($menus as $category => $items)
             <div class="category-section" id="{{ $category }}">
                 <h2 class="category-title">
@@ -358,7 +307,6 @@
                     @foreach($items as $menu)
                     <div class="col-lg-4 col-md-6 menu-item">
                         <div class="card menu-card" id="menu-card-{{ $menu->id }}-cat">
-                            <!-- Menu Image -->
                             @if($menu->image)
                                 <img src="{{ asset('storage/' . $menu->image) }}" alt="{{ $menu->name }}" class="menu-image">
                             @else
@@ -367,13 +315,11 @@
                                 </div>
                             @endif
                             
-                            <!-- Category Badge -->
                             <span class="menu-category-badge">
                                 {{ $categories[$menu->category] ?? ucfirst($menu->category) }}
                             </span>
 
                             <div class="card-body">
-                                <!-- Checkbox -->
                                 <div class="form-check mb-3">
                                     <input class="form-check-input menu-checkbox" type="checkbox" 
                                            id="menu-{{ $menu->id }}-cat" data-menu-id="{{ $menu->id }}"
@@ -391,7 +337,6 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="menu-price">Rp {{ number_format($menu->price, 0, ',', '.') }}</span>
                                     
-                                    <!-- Quantity Input (hidden by default) -->
                                     <div class="quantity-control" id="quantity-{{ $menu->id }}-cat" style="display: none;">
                                         <div class="input-group input-group-sm">
                                             <button type="button" class="btn btn-outline-secondary" onclick="decreaseQuantity({{ $menu->id }})">-</button>
@@ -409,7 +354,6 @@
             </div>
             @endforeach
 
-            <!-- Order Button -->
             <div class="text-center mt-5 mb-5">
                 <button type="button" class="btn btn-primary btn-lg" onclick="handleOrderButton()">
                     <i class="fas fa-paper-plane me-2"></i>Pesan Sekarang
@@ -418,7 +362,6 @@
         </form>
     </div>
 
-    <!-- Order Section -->
     <div class="order-section">
         <div class="container text-center">
             <h3 class="mb-3">Siap Memesan?</h3>
@@ -437,7 +380,6 @@
         </div>
     </div>
 
-    <!-- Login Required Modal -->
     <div class="modal fade" id="loginRequiredModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -449,51 +391,16 @@
                     <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
                     <h5>Anda harus login untuk melakukan pemesanan</h5>
                     <p class="text-muted">Silakan login sebagai customer untuk memesan menu favorit Anda.</p>
-                    
-                    <!-- Selected Items Preview -->
-                    <div id="selectedItemsPreview" class="mt-4"></div>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nanti Saja</button>
-                    <a href="{{ route('login') }}" class="btn btn-primary">
-                        <i class="fas fa-sign-in-alt me-2"></i>Login Customer
-                    </a>
-                    <a href="{{ route('register') }}" class="btn btn-outline-primary">
-                        <i class="fas fa-user-plus me-2"></i>Daftar Customer
-                    </a>
+                    <a href="{{ route('login') }}" class="btn btn-primary">Login Customer</a>
+                    <a href="{{ route('register') }}" class="btn btn-outline-primary">Daftar Customer</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Admin Redirect Modal -->
-    <div class="modal fade" id="adminRedirectModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="fas fa-user-shield me-2"></i>Halo Admin!
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <i class="fas fa-tachometer-alt fa-3x text-primary mb-3"></i>
-                    <h5>Halo, {{ Auth::user()->name ?? 'Admin' }}!</h5>
-                    <p class="text-muted">Anda login sebagai Admin. Ingin ke Dashboard Admin?</p>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        <i class="fas fa-utensils me-2"></i>Lihat Menu
-                    </button>
-                    <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">
-                        <i class="fas fa-tachometer-alt me-2"></i>Ke Dashboard
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Order Confirmation Modal (Untuk Customer) -->
     <div class="modal fade" id="orderConfirmationModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -509,7 +416,6 @@
                         <h5>Konfirmasi Pesanan Anda</h5>
                     </div>
                     
-                    <!-- Informasi Customer -->
                     <div class="customer-info mb-4 p-3 bg-light rounded">
                         <h6><i class="fas fa-user me-2"></i>Informasi Pemesan:</h6>
                         <div class="row">
@@ -523,10 +429,8 @@
                         </div>
                     </div>
 
-                    <!-- Selected Items Preview -->
                     <div id="selectedItemsPreview" class="mb-4"></div>
 
-                    <!-- Notes Input -->
                     <div class="mb-3">
                         <label for="notes" class="form-label"><strong>Catatan Pesanan (Opsional):</strong></label>
                         <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="Contoh: Pedas, tanpa bawang, tambah es, dll."></textarea>
@@ -544,56 +448,25 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-dark text-white py-4 mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5><i class="fas fa-coffee me-2"></i>Cafe</h5>
-                    <p>Menghadirkan pengalaman kuliner terbaik dengan bahan-bahan berkualitas premium.</p>
-                </div>
-                <div class="col-md-3">
-                    <h5>Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#menu" class="text-white text-decoration-none">Menu</a></li>
-                        <li><a href="{{ route('order.history.form') }}" class="text-white text-decoration-none">Cek Pesanan</a></li>
-                        <li><a href="{{ route('admin.login') }}" class="text-white text-decoration-none">Login Admin</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h5>Kontak</h5>
-                    <ul class="list-unstyled">
-                        <li><i class="fas fa-map-marker-alt me-2"></i> Jl. Contoh No. 123</li>
-                        <li><i class="fas fa-phone me-2"></i> (021) 123-4567</li>
-                        <li><i class="fas fa-envelope me-2"></i> info@cafe.com</li>
-                    </ul>
-                </div>
-            </div>
-            <hr>
-            <div class="text-center">
-                <p>&copy; 2024 Cafe. All rights reserved.</p>
-            </div>
+        <div class="container text-center">
+            <p>&copy; 2024 Cafe. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         let selectedItems = [];
+        const isUserLoggedIn = @json(Auth::check());
+        const userRole = @json(Auth::user()->role ?? null);
 
-        // Category Navigation
+        // Category Navigation Logic
         document.querySelectorAll('#categoryTabs .nav-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                
-                // Remove active class from all links
-                document.querySelectorAll('#categoryTabs .nav-link').forEach(l => {
-                    l.classList.remove('active');
-                });
-                
-                // Add active class to clicked link
+                document.querySelectorAll('#categoryTabs .nav-link').forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
                 
-                // Scroll to category
                 const targetId = this.getAttribute('href').substring(1);
                 if (targetId === 'all') {
                     window.scrollTo({ top: document.getElementById('menu').offsetTop - 80, behavior: 'smooth' });
@@ -606,7 +479,7 @@
             });
         });
 
-        // Checkbox change event
+        // Checkbox Logic
         document.querySelectorAll('.menu-checkbox').forEach(checkbox => {
             checkbox.addEventListener('change', function() {
                 const menuId = this.dataset.menuId;
@@ -628,25 +501,14 @@
                     if (menuCardCat) menuCardCat.classList.remove('selected-item');
                     removeFromSelectedItems(menuId);
                 }
-                
                 updateCartCount();
             });
         });
 
         function addToSelectedItems(menuId, name, price, image, category) {
-            // Check if item already exists
             const existingItem = selectedItems.find(item => item.menuId === menuId);
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                selectedItems.push({
-                    menuId: menuId,
-                    name: name,
-                    price: price,
-                    quantity: 1,
-                    image: image,
-                    category: category
-                });
+            if (!existingItem) {
+                selectedItems.push({ menuId, name, price, quantity: 1, image, category });
             }
         }
 
@@ -678,109 +540,66 @@
 
         function updateItemQuantity(menuId, quantity) {
             const item = selectedItems.find(item => item.menuId === menuId);
-            if (item) {
-                item.quantity = quantity;
-            }
+            if (item) item.quantity = quantity;
             updateCartCount();
         }
 
         function updateCartCount() {
-            const cartCount = document.getElementById('cartCount');
             const totalItems = selectedItems.reduce((sum, item) => sum + item.quantity, 0);
-            cartCount.textContent = totalItems;
+            document.getElementById('cartCount').textContent = totalItems;
         }
 
-        // Function utama untuk handle tombol pesan
         function handleOrderButton() {
             if (selectedItems.length === 0) {
                 alert('Silakan pilih minimal satu menu!');
                 return;
             }
 
-            // Update selected items preview
-            updateSelectedItemsPreview();
-
-            // Cek status login dan role user
-            @auth
-                @if(Auth::user()->role === 'admin')
-                    // Jika admin, tampilkan modal redirect ke dashboard
-                    const adminModal = new bootstrap.Modal(document.getElementById('adminRedirectModal'));
-                    adminModal.show();
-                @else
-                    // Jika customer, tampilkan modal konfirmasi pesanan
-                    const orderModal = new bootstrap.Modal(document.getElementById('orderConfirmationModal'));
-                    orderModal.show();
-                @endif
-            @else
-                // Jika belum login, tampilkan modal login required
+            if (!isUserLoggedIn) {
                 const loginModal = new bootstrap.Modal(document.getElementById('loginRequiredModal'));
                 loginModal.show();
-            @endauth
+                return;
+            }
+
+            updateSelectedItemsPreview();
+            const orderModal = new bootstrap.Modal(document.getElementById('orderConfirmationModal'));
+            orderModal.show();
         }
 
         function updateSelectedItemsPreview() {
-            const preview = document.getElementById('selectedItemsPreview');
-            if (!preview) return;
+            const previewContainer = document.getElementById('selectedItemsPreview');
+            let html = '<table class="table"><thead><tr><th>Menu</th><th>Harga</th><th>Jumlah</th><th>Total</th></tr></thead><tbody>';
+            let grandTotal = 0;
 
-            preview.innerHTML = `
-                <h6><i class="fas fa-list me-2"></i>Items Pesanan:</h6>
-                <div class="table-responsive">
-                    <table class="table table-sm table-bordered">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Menu</th>
-                                <th class="text-center">Qty</th>
-                                <th class="text-end">Harga</th>
-                                <th class="text-end">Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${selectedItems.map(item => `
-                                <tr>
-                                    <td>${item.name}</td>
-                                    <td class="text-center">${item.quantity}</td>
-                                    <td class="text-end">Rp ${item.price.toLocaleString('id-ID')}</td>
-                                    <td class="text-end">Rp ${(item.price * item.quantity).toLocaleString('id-ID')}</td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                        <tfoot class="table-light">
-                            <tr>
-                                <td colspan="3" class="text-end"><strong>Total:</strong></td>
-                                <td class="text-end"><strong>Rp ${selectedItems.reduce((sum, item) => sum + (item.price * item.quantity), 0).toLocaleString('id-ID')}</strong></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            `;
+            selectedItems.forEach(item => {
+                let total = item.price * item.quantity;
+                grandTotal += total;
+                html += `<tr>
+                    <td>${item.name}</td>
+                    <td>Rp ${item.price.toLocaleString('id-ID')}</td>
+                    <td>${item.quantity}</td>
+                    <td>Rp ${total.toLocaleString('id-ID')}</td>
+                </tr>`;
+            });
+
+            html += `<tr><td colspan="3" class="text-end"><strong>Total Bayar:</strong></td><td><strong>Rp ${grandTotal.toLocaleString('id-ID')}</strong></td></tr></tbody></table>`;
+            previewContainer.innerHTML = html;
         }
 
+        // ==========================================================
+        // 🛠️ FIX SAKTI: PROSES MENGIRIM CATATAN KE FORM SEBELUM SUBMIT
+        // ==========================================================
         function submitOrder() {
-            // Show loading state
-            const submitBtn = document.querySelector('#orderConfirmationModal .btn-success');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memproses...';
-            submitBtn.disabled = true;
+            // 1. Ambil nilai teks dari textarea modal konfirmasi
+            const notesValue = document.getElementById('notes').value;
 
-            // Set form values and submit
+            // 2. Masukkan nilai items (JSON) dan isi catatan ke form hidden input utama
             document.getElementById('orderItems').value = JSON.stringify(selectedItems);
+            document.getElementById('hiddenOrderNotes').value = notesValue;
+
+            // 3. Submit form secara standar menuju OrderController
             document.getElementById('orderForm').submit();
         }
-
-        // Initialize
-        updateCartCount();
-
-        // Update checkbox states when page loads (if any were previously selected)
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.menu-checkbox').forEach(checkbox => {
-                const menuId = checkbox.dataset.menuId;
-                const item = selectedItems.find(item => item.menuId === menuId);
-                if (item) {
-                    checkbox.checked = true;
-                    checkbox.dispatchEvent(new Event('change'));
-                }
-            });
-        });
     </script>
 </body>
 </html>
